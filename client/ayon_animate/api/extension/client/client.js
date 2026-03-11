@@ -9,8 +9,8 @@
 
     log.warn("script start");
 
-    WSRPC.DEBUG = false;
-    WSRPC.TRACE = false;
+    WSRPC.DEBUG = true;
+    WSRPC.TRACE = true;
 
     function myCallBack(){
         log.warn("Triggered index.jsx");
