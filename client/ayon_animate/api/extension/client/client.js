@@ -88,7 +88,7 @@
           return str.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"');
       }
 
-      RPC.addRoute('Photoshop.open', function (data) {
+      RPC.addRoute('Animate.open', function (data) {
               log.warn('Server called client route "open":', data);
               var escapedPath = EscapeStringForJSX(data.path);
               return runEvalScript("fileOpen('" + escapedPath +"')")
@@ -98,7 +98,7 @@
                   });
       });
 
-      RPC.addRoute('Photoshop.read', function (data) {
+      RPC.addRoute('Animate.read', function (data) {
               log.warn('Server called client route "read":', data);
               return runEvalScript("getHeadline()")
                   .then(function(result){
@@ -107,24 +107,24 @@
                   });
       });
 
-      RPC.addRoute('Photoshop.get_layers', function (data) {
-              log.warn('Server called client route "get_layers":', data);
-              return runEvalScript("getLayers()")
-                  .then(function(result){
-                      log.warn("getLayers: " + result);
-                      return result;
-                  });
-      });
-      RPC.addRoute('Photoshop.get_color_profile_name', function (data) {
-              log.warn('Server called client route "get_color_profile_name":', data);
-              return runEvalScript("getColorProfileName()")
-                .then(function (result) {
-                  log.warn("get_color_profile_name: " + result);
-                  return result;
-                });
-      });
+    //   RPC.addRoute('Animate.get_layers', function (data) {
+    //           log.warn('Server called client route "get_layers":', data);
+    //           return runEvalScript("getLayers()")
+    //               .then(function(result){
+    //                   log.warn("getLayers: " + result);
+    //                   return result;
+    //               });
+    //   });
+    //   RPC.addRoute('Animate.get_color_profile_name', function (data) {
+    //           log.warn('Server called client route "get_color_profile_name":', data);
+    //           return runEvalScript("getColorProfileName()")
+    //             .then(function (result) {
+    //               log.warn("get_color_profile_name: " + result);
+    //               return result;
+    //             });
+    //   });
 
-      RPC.addRoute('Photoshop.get_document_settings', function (data) {
+      RPC.addRoute('Animate.get_document_settings', function (data) {
               log.warn('Server called client route "get_document_settings":', data);
               return runEvalScript("getDocumentSettings()")
                 .then(function (result) {
@@ -132,39 +132,39 @@
                   return result;
                 });
       });
-      RPC.addRoute('Photoshop.set_document_settings', function (data) {
-              log.warn('Server called client route "set_document_settings":', data);
-              var resolution = data.resolution !== undefined ? data.resolution : null;
-              var mode = data.mode !== undefined ? "'" + data.mode + "'" : null;
-              var bits = data.bits !== undefined ? "'" + data.bits + "'" : null;
-              return runEvalScript("setDocumentSettings(" + resolution + ", " +
-                                   mode + ", " + bits + ")")
-                .then(function (result) {
-                  log.warn("set_document_settings: " + result);
-                  return result;
-                });
-      });
+    //   RPC.addRoute('Animate.set_document_settings', function (data) {
+    //           log.warn('Server called client route "set_document_settings":', data);
+    //           var resolution = data.resolution !== undefined ? data.resolution : null;
+    //           var mode = data.mode !== undefined ? "'" + data.mode + "'" : null;
+    //           var bits = data.bits !== undefined ? "'" + data.bits + "'" : null;
+    //           return runEvalScript("setDocumentSettings(" + resolution + ", " +
+    //                                mode + ", " + bits + ")")
+    //             .then(function (result) {
+    //               log.warn("set_document_settings: " + result);
+    //               return result;
+    //             });
+    //   });
 
-      RPC.addRoute('Photoshop.set_visible', function (data) {
-              log.warn('Server called client route "set_visible":', data);
-              return runEvalScript("setVisible(" + data.layer_id + ", " +
-                                   data.visibility + ")")
-                  .then(function(result){
-                      log.warn("setVisible: " + result);
-                      return result;
-                  });
-      });
+    //   RPC.addRoute('Animate.set_visible', function (data) {
+    //           log.warn('Server called client route "set_visible":', data);
+    //           return runEvalScript("setVisible(" + data.layer_id + ", " +
+    //                                data.visibility + ")")
+    //               .then(function(result){
+    //                   log.warn("setVisible: " + result);
+    //                   return result;
+    //               });
+    //   });
 
-      RPC.addRoute('Photoshop.set_layers_visibility', function (data) {
-              log.warn('Server called client route "set_layers_visibility":', data);
-              return runEvalScript("setLayersVisibility('" + data.visibility_map + "')")
-                  .then(function(result){
-                      log.warn("setLayersVisibility: " + result);
-                      return result;
-                  });
-      });
+    //   RPC.addRoute('Animate.set_layers_visibility', function (data) {
+    //           log.warn('Server called client route "set_layers_visibility":', data);
+    //           return runEvalScript("setLayersVisibility('" + data.visibility_map + "')")
+    //               .then(function(result){
+    //                   log.warn("setLayersVisibility: " + result);
+    //                   return result;
+    //               });
+    //   });
 
-      RPC.addRoute('Photoshop.get_active_document_name', function (data) {
+      RPC.addRoute('Animate.get_active_document_name', function (data) {
               log.warn('Server called client route "get_active_document_name":',
                         data);
               return runEvalScript("getActiveDocumentName()")
@@ -174,17 +174,17 @@
                   });
       });
 
-      RPC.addRoute('Photoshop.get_active_document_full_name', function (data) {
-              log.warn('Server called client route ' +
-                       '"get_active_document_full_name":', data);
-              return runEvalScript("getActiveDocumentFullName()")
-                  .then(function(result){
-                      log.warn("save: " + result);
-                      return result;
-                  });
-      });
+    //   RPC.addRoute('Animate.get_active_document_full_name', function (data) {
+    //           log.warn('Server called client route ' +
+    //                    '"get_active_document_full_name":', data);
+    //           return runEvalScript("getActiveDocumentFullName()")
+    //               .then(function(result){
+    //                   log.warn("save: " + result);
+    //                   return result;
+    //               });
+    //   });
 
-      RPC.addRoute('Photoshop.save', function (data) {
+      RPC.addRoute('Animate.save', function (data) {
               log.warn('Server called client route "save":', data);
 
               return runEvalScript("save()")
@@ -194,133 +194,133 @@
                   });
       });
 
-      RPC.addRoute('Photoshop.get_selected_layers', function (data) {
-              log.warn('Server called client route "get_selected_layers":', data);
+    //   RPC.addRoute('Animate.get_selected_layers', function (data) {
+    //           log.warn('Server called client route "get_selected_layers":', data);
 
-              return runEvalScript("getSelectedLayers()")
-                  .then(function(result){
-                      log.warn("get_selected_layers: " + result);
-                      return result;
-                  });
-      });
+    //           return runEvalScript("getSelectedLayers()")
+    //               .then(function(result){
+    //                   log.warn("get_selected_layers: " + result);
+    //                   return result;
+    //               });
+    //   });
 
-      RPC.addRoute('Photoshop.get_layer_blend_mode', function (data) {
-              log.warn('Server called client route "get_layer_blend_mode":', data);
-              return runEvalScript("getLayerBlendMode(" + data.layer_id + ")")
-                  .then(function(result){
-                      log.warn("get_layer_blend_mode: " + result);
-                      return result;
-                  });
-      });
+    //   RPC.addRoute('Animate.get_layer_blend_mode', function (data) {
+    //           log.warn('Server called client route "get_layer_blend_mode":', data);
+    //           return runEvalScript("getLayerBlendMode(" + data.layer_id + ")")
+    //               .then(function(result){
+    //                   log.warn("get_layer_blend_mode: " + result);
+    //                   return result;
+    //               });
+    //   });
 
-      RPC.addRoute('Photoshop.create_group', function (data) {
-              log.warn('Server called client route "create_group":', data);
+    //   RPC.addRoute('Animate.create_group', function (data) {
+    //           log.warn('Server called client route "create_group":', data);
 
-              return runEvalScript("createGroup('" + data.name + "')")
-                  .then(function(result){
-                      log.warn("createGroup: " + result);
-                      return result;
-                  });
-      });
+    //           return runEvalScript("createGroup('" + data.name + "')")
+    //               .then(function(result){
+    //                   log.warn("createGroup: " + result);
+    //                   return result;
+    //               });
+    //   });
 
-      RPC.addRoute('Photoshop.group_selected_layers', function (data) {
-              log.warn('Server called client route "group_selected_layers":',
-                       data);
+    //   RPC.addRoute('Animate.group_selected_layers', function (data) {
+    //           log.warn('Server called client route "group_selected_layers":',
+    //                    data);
 
-              return runEvalScript("groupSelectedLayers(null, "+
-                                   "'" + data.name +"')")
-                  .then(function(result){
-                      log.warn("group_selected_layers: " + result);
-                      return result;
-                  });
-      });
+    //           return runEvalScript("groupSelectedLayers(null, "+
+    //                                "'" + data.name +"')")
+    //               .then(function(result){
+    //                   log.warn("group_selected_layers: " + result);
+    //                   return result;
+    //               });
+    //   });
 
-      RPC.addRoute('Photoshop.merge_all_layersets', function (data) {
-            log.warn('Server called client route "merge_all_layersets":',
-                    data);
+//       RPC.addRoute('Animate.merge_all_layersets', function (data) {
+//             log.warn('Server called client route "merge_all_layersets":',
+//                     data);
 
-            return runEvalScript("mergeAllLayerSets('" + data.parent_set + "')")
-                .then(function(result){
-                    log.warn("merge_all_layersets: " + result);
-                    return result;
-                });
-      });
+//             return runEvalScript("mergeAllLayerSets('" + data.parent_set + "')")
+//                 .then(function(result){
+//                     log.warn("merge_all_layersets: " + result);
+//                     return result;
+//                 });
+//       });
 
-      RPC.addRoute('Photoshop.dissolve_layerset', function (data) {
-            log.warn('Server called client route "dissolve_layerset":',
-                    data);
+//       RPC.addRoute('Animate.dissolve_layerset', function (data) {
+//             log.warn('Server called client route "dissolve_layerset":',
+//                     data);
 
-            return runEvalScript("dissolveLayerSet('" + data.layerset_id + "')")
-                .then(function(result){
-                    log.warn("dissolve_layerset: " + result);
-                    return result;
-                });
-      });
+//             return runEvalScript("dissolveLayerSet('" + data.layerset_id + "')")
+//                 .then(function(result){
+//                     log.warn("dissolve_layerset: " + result);
+//                     return result;
+//                 });
+//       });
 
-      RPC.addRoute('Photoshop.import_smart_object', function (data) {
-              log.warn('Server called client "import_smart_object":', data);
-              var escapedPath = EscapeStringForJSX(data.path);
-              return runEvalScript("importSmartObject('" + escapedPath +"', " +
-                                                      "'"+ data.name +"',"+
-                                                      + data.as_reference +")")
-                  .then(function(result){
-                      log.warn("import_smart_object: " + result);
-                      return result;
-                  });
-      });
+//       RPC.addRoute('Animate.import_smart_object', function (data) {
+//               log.warn('Server called client "import_smart_object":', data);
+//               var escapedPath = EscapeStringForJSX(data.path);
+//               return runEvalScript("importSmartObject('" + escapedPath +"', " +
+//                                                       "'"+ data.name +"',"+
+//                                                       + data.as_reference +")")
+//                   .then(function(result){
+//                       log.warn("import_smart_object: " + result);
+//                       return result;
+//                   });
+//       });
 
-      RPC.addRoute('Photoshop.replace_smart_object', function (data) {
-              log.warn('Server called route "replace_smart_object":', data);
-              var escapedPath = EscapeStringForJSX(data.path);
-              return runEvalScript("replaceSmartObjects("+data.layer_id+"," +
-                                                        "'" + escapedPath +"',"+
-                                                        "'"+ data.name +"')")
-                  .then(function(result){
-                      log.warn("replaceSmartObjects: " + result);
-                      return result;
-                  });
-      });
+//       RPC.addRoute('Animate.replace_smart_object', function (data) {
+//               log.warn('Server called route "replace_smart_object":', data);
+//               var escapedPath = EscapeStringForJSX(data.path);
+//               return runEvalScript("replaceSmartObjects("+data.layer_id+"," +
+//                                                         "'" + escapedPath +"',"+
+//                                                         "'"+ data.name +"')")
+//                   .then(function(result){
+//                       log.warn("replaceSmartObjects: " + result);
+//                       return result;
+//                   });
+//       });
 
-      RPC.addRoute('Photoshop.delete_layer', function (data) {
-              log.warn('Server called route "delete_layer":', data);
-              return runEvalScript("deleteLayer("+data.layer_id+")")
-                  .then(function(result){
-                      log.warn("delete_layer: " + result);
-                      return result;
-                  });
-      });
+//       RPC.addRoute('Animate.delete_layer', function (data) {
+//               log.warn('Server called route "delete_layer":', data);
+//               return runEvalScript("deleteLayer("+data.layer_id+")")
+//                   .then(function(result){
+//                       log.warn("delete_layer: " + result);
+//                       return result;
+//                   });
+//       });
 
-      RPC.addRoute('Photoshop.rename_layer', function (data) {
-        log.warn('Server called route "rename_layer":', data);
-        return runEvalScript("renameLayer("+data.layer_id+", " +
-                                          "'"+ data.name +"')")
-            .then(function(result){
-                log.warn("rename_layer: " + result);
-                return result;
-            });
-});
+//       RPC.addRoute('Animate.rename_layer', function (data) {
+//         log.warn('Server called route "rename_layer":', data);
+//         return runEvalScript("renameLayer("+data.layer_id+", " +
+//                                           "'"+ data.name +"')")
+//             .then(function(result){
+//                 log.warn("rename_layer: " + result);
+//                 return result;
+//             });
+// });
 
-      RPC.addRoute('Photoshop.select_layers', function (data) {
-              log.warn('Server called client route "select_layers":', data);
+//       RPC.addRoute('Animate.select_layers', function (data) {
+//               log.warn('Server called client route "select_layers":', data);
 
-              return runEvalScript("selectLayers('" + data.layers +"')")
-                  .then(function(result){
-                      log.warn("select_layers: " + result);
-                      return result;
-                  });
-      });
+//               return runEvalScript("selectLayers('" + data.layers +"')")
+//                   .then(function(result){
+//                       log.warn("select_layers: " + result);
+//                       return result;
+//                   });
+//       });
 
-      RPC.addRoute('Photoshop.is_saved', function (data) {
-              log.warn('Server called client route "is_saved":', data);
+//       RPC.addRoute('Animate.is_saved', function (data) {
+//               log.warn('Server called client route "is_saved":', data);
 
-              return runEvalScript("isSaved()")
-                  .then(function(result){
-                      log.warn("is_saved: " + result);
-                      return result;
-                  });
-      });
+//               return runEvalScript("isSaved()")
+//                   .then(function(result){
+//                       log.warn("is_saved: " + result);
+//                       return result;
+//                   });
+//       });
 
-      RPC.addRoute('Photoshop.saveAs', function (data) {
+      RPC.addRoute('Animate.saveAs', function (data) {
               log.warn('Server called client route "saveAsJPEG":', data);
               var escapedPath = EscapeStringForJSX(data.image_path);
               return runEvalScript("saveAs('" + escapedPath + "', " +
@@ -332,16 +332,16 @@
                   });
       });
 
-      RPC.addRoute('Photoshop.duplicate_document', function (data) {
-              log.warn('Server called client route "duplicate_document":', data);
-              return runEvalScript("duplicateDocument('" + data.newName + "')")
-                  .then(function(result){
-                      log.warn("duplicated: " + result);
-                      return result;
-                  });
-      });
+    //   RPC.addRoute('Animate.duplicate_document', function (data) {
+    //           log.warn('Server called client route "duplicate_document":', data);
+    //           return runEvalScript("duplicateDocument('" + data.newName + "')")
+    //               .then(function(result){
+    //                   log.warn("duplicated: " + result);
+    //                   return result;
+    //               });
+    //   });
 
-      RPC.addRoute('Photoshop.close_document', function (data) {
+      RPC.addRoute('Animate.close_document', function (data) {
                 log.warn('Server called client route "close_document":', data);
                 return runEvalScript("closeDocument("+data.id+")")
                     .then(function(result){
@@ -350,16 +350,16 @@
                     });
       });
 
-      RPC.addRoute('Photoshop.revert_to_previous', function (data) {
-            log.warn('Server called client route "revertToPrevious":', data);
-            return runEvalScript("revertToPrevious()")
-                .then(function(result){
-                    log.warn("reverted: " + result);
-                    return result;
-                });
-      });
+    //   RPC.addRoute('Animate.revert_to_previous', function (data) {
+    //         log.warn('Server called client route "revertToPrevious":', data);
+    //         return runEvalScript("revertToPrevious()")
+    //             .then(function(result){
+    //                 log.warn("reverted: " + result);
+    //                 return result;
+    //             });
+    //   });
 
-      RPC.addRoute('Photoshop.imprint', function (data) {
+      RPC.addRoute('Animate.imprint', function (data) {
               log.warn('Server called client route "imprint":', data);
               var escaped = data.payload.replace(/\n/g, "\\n");
               return runEvalScript("imprint('" + escaped + "')")
@@ -369,24 +369,24 @@
                   });
       });
 
-      RPC.addRoute('Photoshop.get_extension_version', function (data) {
+      RPC.addRoute('Animate.get_extension_version', function (data) {
         log.warn('Server called client route "get_extension_version":', data);
         return get_extension_version();
       });
 
-      RPC.addRoute('Photoshop.close', function (data) {
+      RPC.addRoute('Animate.close', function (data) {
         log.warn('Server called client route "close":', data);
         return runEvalScript("close()");
       });
 
-      RPC.addRoute('Photoshop.eval_code', function (data) {
+      RPC.addRoute('Animate.eval_code', function (data) {
         log.warn('Server called client route "eval_code":', data);
         return runEvalScript(data.code).then(function(result){
                       return result;
                   });
       });
 
-      RPC.call('Photoshop.ping').then(function (data) {
+      RPC.call('Animate.ping').then(function (data) {
           log.warn('Result for calling server route "ping": ', data);
           return runEvalScript("ping()")
                   .then(function(result){
