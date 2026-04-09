@@ -88,6 +88,6 @@ def main(argv):
         # Show message box
         on_invalid_args(after_script_idx is None)
 
-
+    show_error_messagebox("test", "test")
 if __name__ == "__main__":
     main(sys.argv)

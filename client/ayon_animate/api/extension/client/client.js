@@ -17,8 +17,8 @@
     }
     // importing through manifest.xml isn't working because relative paths
     // possibly TODO
-    jsx.evalFile('./host/index.jsx', myCallBack);
-
+    csInterface.evalScript('./host/index.jsx', myCallBack);
+    
     function runEvalScript(script) {
         // because of asynchronous nature of functions in jsx
         // this waits for response
@@ -42,9 +42,9 @@
 
     function get_extension_version(){
         /** Returns version number from extension manifest.xml **/
-        log.debug("get_extension_version")
+        // log.debug("get_extension_version")
         var path = csInterface.getSystemPath(SystemPath.EXTENSION);
-        log.debug("extension path " + path);
+        // log.debug("extension path " + path);
 
         var result = window.cep.fs.readFile(path + "/CSXS/manifest.xml");
         var version = undefined;
@@ -66,18 +66,18 @@
 
     function main(websocket_url){
       // creates connection to 'websocket_url', registers routes
-      log.warn("websocket_url", websocket_url);
+    //   log.warn("websocket_url", websocket_url);
       var default_url = 'ws://localhost:8099/ws/';
 
       if  (websocket_url == ''){
            websocket_url = default_url;
       }
-      log.warn("connecting to:", websocket_url);
+    //   log.warn("connecting to:", websocket_url);
       RPC = new WSRPC(websocket_url, 5000); // spin connection
 
       RPC.connect();
 
-      log.warn("connected");
+    //   log.warn("connected");
 
       function EscapeStringForJSX(str){
       // Replaces:
@@ -89,229 +89,229 @@
       }
 
       RPC.addRoute('Animate.open', function (data) {
-              log.warn('Server called client route "open":', data);
+            //   log.warn('Server called client route "open":', data);
               var escapedPath = EscapeStringForJSX(data.path);
               return runEvalScript("fileOpen('" + escapedPath +"')")
                   .then(function(result){
-                      log.warn("open: " + result);
+                    //   log.warn("open: " + result);
                       return result;
                   });
       });
 
       RPC.addRoute('Animate.read', function (data) {
-              log.warn('Server called client route "read":', data);
+            //   log.warn('Server called client route "read":', data);
               return runEvalScript("getHeadline()")
                   .then(function(result){
-                      log.warn("getHeadline: " + result);
+                    //   log.warn("getHeadline: " + result);
                       return result;
                   });
       });
 
       RPC.addRoute('Animate.get_layers', function (data) {
-              log.warn('Server called client route "get_layers":', data);
+            //   log.warn('Server called client route "get_layers":', data);
               return runEvalScript("getLayers()")
                   .then(function(result){
-                      log.warn("getLayers: " + result);
+                    //   log.warn("getLayers: " + result);
                       return result;
                   });
       });
       RPC.addRoute('Animate.get_color_profile_name', function (data) {
-              log.warn('Server called client route "get_color_profile_name":', data);
+            //   log.warn('Server called client route "get_color_profile_name":', data);
               return runEvalScript("getColorProfileName()")
                 .then(function (result) {
-                  log.warn("get_color_profile_name: " + result);
+                //   log.warn("get_color_profile_name: " + result);
                   return result;
                 });
       });
 
       RPC.addRoute('Animate.get_document_settings', function (data) {
-              log.warn('Server called client route "get_document_settings":', data);
+            //   log.warn('Server called client route "get_document_settings":', data);
               return runEvalScript("getDocumentSettings()")
                 .then(function (result) {
-                  log.warn("get_document_settings: " + result);
+                //   log.warn("get_document_settings: " + result);
                   return result;
                 });
       });
       RPC.addRoute('Animate.set_document_settings', function (data) {
-              log.warn('Server called client route "set_document_settings":', data);
+            //   log.warn('Server called client route "set_document_settings":', data);
               var resolution = data.resolution !== undefined ? data.resolution : null;
               var mode = data.mode !== undefined ? "'" + data.mode + "'" : null;
               var bits = data.bits !== undefined ? "'" + data.bits + "'" : null;
               return runEvalScript("setDocumentSettings(" + resolution + ", " +
                                    mode + ", " + bits + ")")
                 .then(function (result) {
-                  log.warn("set_document_settings: " + result);
+                //   log.warn("set_document_settings: " + result);
                   return result;
                 });
       });
 
       RPC.addRoute('Animate.set_visible', function (data) {
-              log.warn('Server called client route "set_visible":', data);
+            //   log.warn('Server called client route "set_visible":', data);
               return runEvalScript("setVisible(" + data.layer_id + ", " +
                                    data.visibility + ")")
                   .then(function(result){
-                      log.warn("setVisible: " + result);
+                    //   log.warn("setVisible: " + result);
                       return result;
                   });
       });
 
       RPC.addRoute('Animate.set_layers_visibility', function (data) {
-              log.warn('Server called client route "set_layers_visibility":', data);
+            //   log.warn('Server called client route "set_layers_visibility":', data);
               return runEvalScript("setLayersVisibility('" + data.visibility_map + "')")
                   .then(function(result){
-                      log.warn("setLayersVisibility: " + result);
+                    //   log.warn("setLayersVisibility: " + result);
                       return result;
                   });
       });
 
       RPC.addRoute('Animate.get_active_document_name', function (data) {
-              log.warn('Server called client route "get_active_document_name":',
-                        data);
+            //   log.warn('Server called client route "get_active_document_name":',
+                        // data);
               return runEvalScript("getActiveDocumentName()")
                   .then(function(result){
-                      log.warn("save: " + result);
+                    //   log.warn("save: " + result);
                       return result;
                   });
       });
 
       RPC.addRoute('Animate.get_active_document_full_name', function (data) {
-              log.warn('Server called client route ' +
-                       '"get_active_document_full_name":', data);
+            //   log.warn('Server called client route ' +
+                    //    '"get_active_document_full_name":', data);
               return runEvalScript("getActiveDocumentFullName()")
                   .then(function(result){
-                      log.warn("save: " + result);
+                    //   log.warn("save: " + result);
                       return result;
                   });
       });
 
       RPC.addRoute('Animate.save', function (data) {
-              log.warn('Server called client route "save":', data);
+            //   log.warn('Server called client route "save":', data);
 
               return runEvalScript("save()")
                   .then(function(result){
-                      log.warn("save: " + result);
+                    //   log.warn("save: " + result);
                       return result;
                   });
       });
 
       RPC.addRoute('Animate.get_selected_layers', function (data) {
-              log.warn('Server called client route "get_selected_layers":', data);
+            //   log.warn('Server called client route "get_selected_layers":', data);
 
               return runEvalScript("getSelectedLayers()")
                   .then(function(result){
-                      log.warn("get_selected_layers: " + result);
+                    //   log.warn("get_selected_layers: " + result);
                       return result;
                   });
       });
 
       RPC.addRoute('Animate.get_layer_blend_mode', function (data) {
-              log.warn('Server called client route "get_layer_blend_mode":', data);
+            //   log.warn('Server called client route "get_layer_blend_mode":', data);
               return runEvalScript("getLayerBlendMode(" + data.layer_id + ")")
                   .then(function(result){
-                      log.warn("get_layer_blend_mode: " + result);
+                    //   log.warn("get_layer_blend_mode: " + result);
                       return result;
                   });
       });
 
       RPC.addRoute('Animate.create_group', function (data) {
-              log.warn('Server called client route "create_group":', data);
+            //   log.warn('Server called client route "create_group":', data);
 
               return runEvalScript("createGroup('" + data.name + "')")
                   .then(function(result){
-                      log.warn("createGroup: " + result);
+                    //   log.warn("createGroup: " + result);
                       return result;
                   });
       });
 
       RPC.addRoute('Animate.group_selected_layers', function (data) {
-              log.warn('Server called client route "group_selected_layers":',
-                       data);
+            //   log.warn('Server called client route "group_selected_layers":',
+                    //    data);
 
               return runEvalScript("groupSelectedLayers(null, "+
                                    "'" + data.name +"')")
                   .then(function(result){
-                      log.warn("group_selected_layers: " + result);
+                    //   log.warn("group_selected_layers: " + result);
                       return result;
                   });
       });
 
       RPC.addRoute('Animate.merge_all_layersets', function (data) {
-            log.warn('Server called client route "merge_all_layersets":',
-                    data);
+            // log.warn('Server called client route "merge_all_layersets":',
+                    // data);
 
             return runEvalScript("mergeAllLayerSets('" + data.parent_set + "')")
                 .then(function(result){
-                    log.warn("merge_all_layersets: " + result);
+                    // log.warn("merge_all_layersets: " + result);
                     return result;
                 });
       });
 
       RPC.addRoute('Animate.dissolve_layerset', function (data) {
-            log.warn('Server called client route "dissolve_layerset":',
-                    data);
+            // log.warn('Server called client route "dissolve_layerset":',
+                    // data);
 
             return runEvalScript("dissolveLayerSet('" + data.layerset_id + "')")
                 .then(function(result){
-                    log.warn("dissolve_layerset: " + result);
+                    // log.warn("dissolve_layerset: " + result);
                     return result;
                 });
       });
 
       RPC.addRoute('Animate.import_smart_object', function (data) {
-              log.warn('Server called client "import_smart_object":', data);
+            //   log.warn('Server called client "import_smart_object":', data);
               var escapedPath = EscapeStringForJSX(data.path);
               return runEvalScript("importSmartObject('" + escapedPath +"', " +
                                                       "'"+ data.name +"',"+
                                                       + data.as_reference +")")
                   .then(function(result){
-                      log.warn("import_smart_object: " + result);
+                    //   log.warn("import_smart_object: " + result);
                       return result;
                   });
       });
 
       RPC.addRoute('Animate.replace_smart_object', function (data) {
-              log.warn('Server called route "replace_smart_object":', data);
+            //   log.warn('Server called route "replace_smart_object":', data);
               var escapedPath = EscapeStringForJSX(data.path);
               return runEvalScript("replaceSmartObjects("+data.layer_id+"," +
                                                         "'" + escapedPath +"',"+
                                                         "'"+ data.name +"')")
                   .then(function(result){
-                      log.warn("replaceSmartObjects: " + result);
+                    //   log.warn("replaceSmartObjects: " + result);
                       return result;
                   });
       });
 
       RPC.addRoute('Animate.delete_layer', function (data) {
-              log.warn('Server called route "delete_layer":', data);
+            //   log.warn('Server called route "delete_layer":', data);
               return runEvalScript("deleteLayer("+data.layer_id+")")
                   .then(function(result){
-                      log.warn("delete_layer: " + result);
+                    //   log.warn("delete_layer: " + result);
                       return result;
                   });
       });
 
       RPC.addRoute('Animate.rename_layer', function (data) {
-        log.warn('Server called route "rename_layer":', data);
+        // log.warn('Server called route "rename_layer":', data);
         return runEvalScript("renameLayer("+data.layer_id+", " +
                                           "'"+ data.name +"')")
             .then(function(result){
-                log.warn("rename_layer: " + result);
+                // log.warn("rename_layer: " + result);
                 return result;
             });
 });
 
       RPC.addRoute('Animate.select_layers', function (data) {
-              log.warn('Server called client route "select_layers":', data);
+            //   log.warn('Server called client route "select_layers":', data);
 
               return runEvalScript("selectLayers('" + data.layers +"')")
                   .then(function(result){
-                      log.warn("select_layers: " + result);
+                    //   log.warn("select_layers: " + result);
                       return result;
                   });
       });
 
       RPC.addRoute('Animate.is_saved', function (data) {
-              log.warn('Server called client route "is_saved":', data);
+            //   log.warn('Server called client route "is_saved":', data);
 
               return runEvalScript("isSaved()")
                   .then(function(result){
@@ -321,19 +321,19 @@
       });
 
       RPC.addRoute('Animate.saveAs', function (data) {
-              log.warn('Server called client route "saveAsJPEG":', data);
+            //   log.warn('Server called client route "saveAsJPEG":', data);
               var escapedPath = EscapeStringForJSX(data.image_path);
               return runEvalScript("saveAs('" + escapedPath + "', " +
                                            "'" + data.ext + "', " +
                                            data.as_copy + ")")
                   .then(function(result){
-                      log.warn("save: " + result);
+                    //   log.warn("save: " + result);
                       return result;
                   });
       });
 
       RPC.addRoute('Animate.duplicate_document', function (data) {
-              log.warn('Server called client route "duplicate_document":', data);
+            //   log.warn('Server called client route "duplicate_document":', data);
               return runEvalScript("duplicateDocument('" + data.newName + "')")
                   .then(function(result){
                       log.warn("duplicated: " + result);
@@ -342,62 +342,62 @@
       });
 
       RPC.addRoute('Animate.close_document', function (data) {
-                log.warn('Server called client route "close_document":', data);
+                // log.warn('Server called client route "close_document":', data);
                 return runEvalScript("closeDocument("+data.id+")")
                     .then(function(result){
-                        log.warn("closed: " + result);
+                        // log.warn("closed: " + result);
                         return result;
                     });
       });
 
       RPC.addRoute('Animate.revert_to_previous', function (data) {
-            log.warn('Server called client route "revertToPrevious":', data);
+            // log.warn('Server called client route "revertToPrevious":', data);
             return runEvalScript("revertToPrevious()")
                 .then(function(result){
-                    log.warn("reverted: " + result);
+                    // log.warn("reverted: " + result);
                     return result;
                 });
       });
 
       RPC.addRoute('Animate.imprint', function (data) {
-              log.warn('Server called client route "imprint":', data);
+            //   log.warn('Server called client route "imprint":', data);
               var escaped = data.payload.replace(/\n/g, "\\n");
               return runEvalScript("imprint('" + escaped + "')")
                   .then(function(result){
-                      log.warn("imprint: " + result);
+                    //   log.warn("imprint: " + result);
                       return result;
                   });
       });
 
       RPC.addRoute('Animate.get_extension_version', function (data) {
-        log.warn('Server called client route "get_extension_version":', data);
+        // log.warn('Server called client route "get_extension_version":', data);
         return get_extension_version();
       });
 
       RPC.addRoute('Animate.close', function (data) {
-        log.warn('Server called client route "close":', data);
+        // log.warn('Server called client route "close":', data);
         return runEvalScript("close()");
       });
 
       RPC.addRoute('Animate.eval_code', function (data) {
-        log.warn('Server called client route "eval_code":', data);
+        // log.warn('Server called client route "eval_code":', data);
         return runEvalScript(data.code).then(function(result){
                       return result;
                   });
       });
 
       RPC.call('Animate.ping').then(function (data) {
-          log.warn('Result for calling server route "ping": ', data);
+        //   log.warn('Result for calling server route "ping": ', data);
           return runEvalScript("ping()")
                   .then(function(result){
-                      log.warn("ping: " + result);
+                    //   log.warn("ping: " + result);
                       return result;
                   });
 
       }, function (error) {
-          log.warn(error);
+        //   log.warn(error);
       });
 
     }
 
-    log.warn("end script");
+    // log.warn("end script");

@@ -56,6 +56,7 @@ class AnimatePrelaunchHook(PreLaunchHook):
 
     def execute(self):
         # Pop executable
+        print("Hello Ayon")
         executable_path = self.launch_context.launch_args.pop(0)
 
         args = []

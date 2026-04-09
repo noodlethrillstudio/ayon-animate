@@ -5,8 +5,6 @@ from .main import (
 
 
 __all__ = (
-    "convert_settings_overrides",
-
     "AnimateSettings",
     "DEFAULT_ANIMATE_SETTING",
 )

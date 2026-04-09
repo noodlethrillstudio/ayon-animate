@@ -41,7 +41,7 @@ class AnimateAddon(AYONAddon, IHostAddon):
     #     publish_in_test(log, close_plugin_name)
 
 
-# def get_launch_script_path():
-#     return os.path.join(
-#         ANIMATE_ADDON_ROOT, "api", "launch_script.py"
-#     )
+def get_launch_script_path():
+    return os.path.join(
+        ANIMATE_ADDON_ROOT, "api", "launch_script.py"
+    )
